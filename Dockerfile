@@ -5,13 +5,15 @@ FROM java:8-jre-alpine
 ENV SUBSONIC_HOME="/var/subsonic"
 ENV SUBSONIC_DATA="${SUBSONIC_HOME}/data"
 ARG SUBSONIC_VERSION="6.0"
-ARG SUBSONIC_TRANSCODERS="ffmpeg flac lame"
+ARG SUBSONIC_TRANSCODERS="flac lame"
 
 #
 COPY start.sh /tmp/start.sh
 
 # Install subsonic
-RUN apk --no-cache add $SUBSONIC_TRANSCODERS && \
+RUN apk --no-cache add $SUBSONIC_TRANSCODERS tzdata && \
+        cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+        apk del tzdata && \
         addgroup -S -g 500 subsonic && \
         adduser -S -h $SUBSONIC_HOME -u 500 -G subsonic subsonic && \
         wget http://subsonic.org/download/subsonic-${SUBSONIC_VERSION}-standalone.tar.gz -O - | tar zxf - -C /tmp && \
