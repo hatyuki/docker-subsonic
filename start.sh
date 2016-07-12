@@ -5,7 +5,7 @@ SUBSONIC_PLAYLISTS="${SUBSONIC_DATA}/playlists"
 
 for directory in $SUBSONIC_DATA $SUBSONIC_MUSIC $SUBSONIC_PODCAST $SUBSONIC_PLAYLISTS; do
     if [ ! -e $directory ]; then
-        install -o subsonic -g subsonic -m 0755 -d $directory
+        install -o subsonic -g subsonic -m 0750 -d $directory
     fi
 done
 

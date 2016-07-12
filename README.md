@@ -10,6 +10,7 @@ This repository contains **Dockerfile** of [Subsonic](http://www.subsonic.org/) 
 
     docker run -d -p 4040:4040 hatyuki/subsonic
 
-### Attach music directories
 
-    docker run -d -p 4040:4040 -v <subsonic-music-dir>:/var/subsonic/data hatyuki/subsonic
+### Attach music directory
+
+    docker run -v <your-music-directory>:/var/subsonic/data hatyuki/subsonic
